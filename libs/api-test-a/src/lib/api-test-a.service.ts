@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiTestAService {
 
-  constructor() { }
+  string_concat(string1: string, string2: string): string {
+    return string1 + string2;
+  }
 }

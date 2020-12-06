@@ -1,0 +1,8 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'ktb-<%= module %>-<%= dasherize(name) %>-page',
+  templateUrl: './<%= dasherize(name) %>.page.html',
+  styleUrls: ['./<%= dasherize(name) %>.page.scss'],
+})
+export class <%= classify(module) %><%= classify(name) %>Page {}

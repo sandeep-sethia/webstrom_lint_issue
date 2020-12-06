@@ -1,0 +1,19 @@
+
+import { Meta, Story, moduleMetadata } from '@storybook/angular';
+
+import { <%= classify(name) %>Component } from './<%= dasherize(name) %>.component';
+import { <%= classify(name) %>Module } from './<%= dasherize(name) %>.module';
+
+export default {
+  title: '<%= classify(name) %>',
+  component: <%= classify(name) %>Component,
+  decorators: [
+    moduleMetadata({
+      imports: [<%= classify(name) %>Module],
+    }),
+  ],
+} as Meta;
+
+export const Overview: Story = (args: <%= classify(name) %>Component) => ({
+  props: args
+})
