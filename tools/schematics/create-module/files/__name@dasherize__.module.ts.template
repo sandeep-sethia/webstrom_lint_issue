@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+/**
+ * Import libraries
+ */
+import { UiModule } from '@ktb/ui';
+
+/**
+ * Import component
+ */
+import { <%= classify(name) %>Component } from './<%= dasherize(name) %>.component';
+
+/**
+ * Import router module
+ */
+import { <%= classify(name) %>RoutingModule } from './<%= dasherize(name) %>-routing';
+
+/**
+ * Import pages
+ */
+import { <%= classify(name) %>IndexPage } from './pages/index/index.page';
+
+@NgModule({
+  declarations: [<%= classify(name) %>Component, <%= classify(name) %>IndexPage],
+  imports: [CommonModule, <%= classify(name) %>RoutingModule, UiModule],
+})
+export class <%= className %>Module {}

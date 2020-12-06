@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "projects": {
+    "lint-sample-application": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/lint-sample-application",
+      "sourceRoot": "apps/lint-sample-application/src",
+      "prefix": "lint-sample",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/lint-sample-application",
+            "index": "apps/lint-sample-application/src/index.html",
+            "main": "apps/lint-sample-application/src/main.ts",
+            "polyfills": "apps/lint-sample-application/src/polyfills.ts",
+            "tsConfig": "apps/lint-sample-application/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/lint-sample-application/src/favicon.ico",
+              "apps/lint-sample-application/src/assets"
+            ],
+            "styles": ["apps/lint-sample-application/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/lint-sample-application/src/environments/environment.ts",
+                  "with": "apps/lint-sample-application/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "lint-sample-application:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lint-sample-application:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lint-sample-application:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/lint-sample-application/tsconfig.app.json",
+              "apps/lint-sample-application/tsconfig.spec.json",
+              "apps/lint-sample-application/tsconfig.editor.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/lint-sample-application/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/lint-sample-application/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lint-sample-application-e2e": {
+      "root": "apps/lint-sample-application-e2e",
+      "sourceRoot": "apps/lint-sample-application-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/lint-sample-application-e2e/cypress.json",
+            "tsConfig": "apps/lint-sample-application-e2e/tsconfig.e2e.json",
+            "devServerTarget": "lint-sample-application:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lint-sample-application:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/lint-sample-application-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/lint-sample-application-e2e/**/*"
+            ]
+          }
+        }
+      }
+    },
+    "module-test-a": {
+      "projectType": "library",
+      "root": "libs/module-test-a",
+      "sourceRoot": "libs/module-test-a/src",
+      "prefix": "lint-sample",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/module-test-a/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/module-test-a/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "module-test-b": {
+      "projectType": "library",
+      "root": "libs/module-test-b",
+      "sourceRoot": "libs/module-test-b/src",
+      "prefix": "lint-sample",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/module-test-b/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/module-test-b/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "api-test-a": {
+      "projectType": "library",
+      "root": "libs/api-test-a",
+      "sourceRoot": "libs/api-test-a/src",
+      "prefix": "lint-sample",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-test-a/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api-test-a/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "lint-sample-application"
+}

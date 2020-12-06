@@ -1,0 +1,43 @@
+{
+  "npmScope": "lint-sample",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "lint-sample-application": {
+      "tags": []
+    },
+    "lint-sample-application-e2e": {
+      "tags": [],
+      "implicitDependencies": ["lint-sample-application"]
+    },
+    "module-test-a": {
+      "tags": []
+    },
+    "module-test-b": {
+      "tags": []
+    },
+    "api-test-a": {
+      "tags": []
+    }
+  }
+}
